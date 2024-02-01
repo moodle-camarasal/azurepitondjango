@@ -1,0 +1,32 @@
+{% load static %}
+<!doctype html>
+<head>
+    <title>Formulario</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="icon"href="{% static 'favicon.ico' %}">
+</head>
+<html>
+   <body>
+<div id="cfe-usuario-marco" class="cfe-mimodal">
+	<div class="cfe-modal-content">
+		<span class="cfe-close"><a href="https://cfevirtual.camarasal.com/">x</a></span>
+		<h3>Registro de Socio</h3>
+        <p><input type="text" placeholder = "Nombre de la empresa" list="browsers" name="browser" id="browser" autocomplete="on">
+<!--        <datalist id="browsers">
+            {% for empresa in diccionario_empresas %}
+                <option value="{{ empresa.Empresa }}">
+            {% endfor %}
+        </datalist></p>
+-->  
+  <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Enviar</button>
+          </form>
+	</div>
+	<div id="mis-avisos" class="cfe-avisos cfe-toogle">{{ mitexto }}<small>[cerrar]</small></div>
+
+</div>
+
+   </body>
+</html>

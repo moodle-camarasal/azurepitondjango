@@ -12,8 +12,11 @@
          <img class="d-block mx-auto mb-4" src="{% static 'images/Logo.png' %}" alt="Azure Logo" style="height:192; width:auto; "/>   
 			<!-- <img class="d-block mx-auto mb-4" src="{% static 'images/azure-icon.svg' %}" alt="Azure Logo" width="192" height="192"/>
              <img  src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
-            <h1 class="display-6 fw-bold text-primary">Extension de camarasal</h1>            
+            <h1 class="display-6 fw-bold text-primary">Extensión de camarasal</h1>            
           </div>
+		  <ul>
+			<li><a href="hello/entry">Formulario</a></li>
+		  </ul>
         <form method="post" action="hello">
             {% csrf_token %}
             <div class="col-md-6 mx-auto text-center">
@@ -28,6 +31,23 @@
                 </div>            
             </div>
         </form>
-     </main>      
+     </main>
+		<!--<script src="{% static 'js/myscrypt.js' %}"></script> 
+		<script>
+		document.addEventListener('DOMContentLoaded', function() { 
+	const h1 = document.querySelector('h1');
+let color = 'blue';
+
+h1.addEventListener('click', () => {
+  if (color === 'blue') {
+    h1.style.color = 'red';
+    color = 'red';
+  } else {
+    h1.style.color = 'blue';
+    color = 'blue';
+  }
+});	
+		});
+		</script>     -->
    </body>
 </html>
