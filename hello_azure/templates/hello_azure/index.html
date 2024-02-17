@@ -14,9 +14,11 @@
              <img  src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
             <h1 class="display-6 fw-bold text-primary">Extensión de camarasal</h1>            
           </div>
-		  <ul>
+		  <div class="container text-center"><ul>
 			<li><a href="hello/entry">Formulario</a></li>
-		  </ul>
+			<li><a href="hello/entry?opcion=usuario">Form usuario</a></li>
+			<li><a href="hello/entry?opcion=socio">Form socio</a></li>
+		  </ul></div>
         <form method="post" action="hello">
             {% csrf_token %}
             <div class="col-md-6 mx-auto text-center">

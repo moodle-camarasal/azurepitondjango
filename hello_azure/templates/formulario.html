@@ -1,32 +1,45 @@
+{% extends "master.html" %}
 {% load static %}
-<!doctype html>
-<head>
-    <title>Formulario</title>
-    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-    <link rel="icon"href="{% static 'favicon.ico' %}">
-</head>
-<html>
-   <body>
+{% block title %}
+  CFE | Registro de socio
+{% endblock %}
+{% block style %}
+	{% if opciones == 'usuario' %}
+		form p:nth-child(2), form p:nth-child(4), form p:nth-child(7){
+		display: none;
+		}
+	{% endif %}
+{% endblock %}
+{% block content %}
 <div id="cfe-usuario-marco" class="cfe-mimodal">
 	<div class="cfe-modal-content">
 		<span class="cfe-close"><a href="https://cfevirtual.camarasal.com/">x</a></span>
-		<h3>Registro de Socio</h3>
-        <p><input type="text" placeholder = "Nombre de la empresa" list="browsers" name="browser" id="browser" autocomplete="on">
-<!--        <datalist id="browsers">
-            {% for empresa in diccionario_empresas %}
-                <option value="{{ empresa.Empresa }}">
-            {% endfor %}
-        </datalist></p>
--->  
-  <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Enviar</button>
-          </form>
+		{% if opciones == 'socio' %}
+		  <h3>Registro de Socio</h3>
+		{% endif %}
+		{% if opciones == 'usuario' %}
+		  <h3>Registro de Usuario</h3>
+		{% endif %}
+		<form method="post">
+			{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Enviar</button>
+		</form>
+		{% if opciones == 'socio' %}
+			<datalist id="browsers">
+				{% for item in empresas %}
+					<option value="{{ item }}"> 
+				{% endfor %}
+			</datalist>
+		{% endif %}
 	</div>
 	<div id="mis-avisos" class="cfe-avisos cfe-toogle">{{ mitexto }}<small>[cerrar]</small></div>
 
 </div>
+<script>
+{% if opciones == 'usuario' %}
+	document.getElementById("id_nombre").placeholder = "Nombre Completo";
+{% endif %}
+</script>
 
-   </body>
-</html>
+{% endblock %}
