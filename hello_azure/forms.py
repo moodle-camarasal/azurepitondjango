@@ -2,8 +2,7 @@ from django import forms
 
 class SociosForm(forms.Form):
     empresa = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Empresa', 'list':'browsers', 'autocomplete':'on'}), label='')
-    nombre = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Nombre del responsable'}), label='')
-    cargo = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Cargo'}), label='')
+    nombre = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Nombre Completo'}), label='')
     correo = forms.EmailField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Correo electrónico'}), label='')
     telefono = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'placeholder': 'Teléfono'}), label='')
     codigo = forms.CharField(max_length=10, widget=forms.TextInput(attrs={'placeholder': 'Numero de socio'}), label='')

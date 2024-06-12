@@ -3,10 +3,14 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from .forms import SociosForm
 from .lista_socios import datos_socios
+from .miscursos import obtener_url_curso, obtener_url_pago, dic_cursos
 
 def index(request):
     print('Request for index page received')
     return render(request, 'hello_azure/index.html')
+    
+def panel(request):
+    return render(request, 'hello_azure/midashboard.html')
 
 @csrf_exempt
 def hello(request):
@@ -25,6 +29,14 @@ def hello(request):
 
 def myform(request):
     opciones = request.GET.get('opcion', '0')
+    id_curso_str = request.GET.get('id', '0')
+    try:
+        id_curso_int = int(id_curso_str)
+    except ValueError:
+        return HttpResponseBadRequest("ID de curso no válido")
+    url_del_curso = obtener_url_curso(id_curso_int, dic_cursos)
+    if url_del_curso is None:
+        url_del_curso = 'https://cfevirtual.camarasal.com/'
     if request.method == 'POST':
         form = SociosForm(request.POST)
         if form.is_valid():
@@ -37,14 +49,5 @@ def myform(request):
             #return redirect(templateHtml)
     else:
         form = SociosForm()
-    diccionario_empresas = {
-        '00012002': {'Filial': 'San Salvador', 'Empresa': '2M SERVICES, S.A. DE C.V.', 'Nombre': ''},
-        '00001593': {'Filial': 'Santa Ana', 'Empresa': '3 M INVERSIONES, S.A. DE C.V.', 'Nombre': ''},
-        '00018628': {'Filial': 'San Salvador', 'Empresa': '360 MEDIA CONTENT, S.A. DE C.V.', 'Nombre': ''},
-        '00006189': {'Filial': 'San Miguel', 'Empresa': 'A & D, S.A. DE C.V.', 'Nombre': '44743'},
-        '00011251': {'Filial': 'San Salvador', 'Empresa': 'A & M INVERSIONES, S.A. DE C.V.', 'Nombre': ''},
-    }
-    #lista_empresas = [empresa['Empresa'] for empresa in diccionario_empresas.values()]
     lista_empresas = [empresa['Empresa'] for empresa in datos_socios.values()]
-    return render(request, 'formulario.html', {'opciones': opciones, 'form':form, 'empresas': lista_empresas})
-    #return render(request, 'formulario.html', {'opciones': opciones, 'form':form})
+    return render(request, 'formulario.html', {'opciones': opciones, 'form':form, 'url_cerrar': url_del_curso, 'empresas': lista_empresas})

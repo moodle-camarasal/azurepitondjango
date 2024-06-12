@@ -1,29 +1,52 @@
 {% extends "master.html" %}
 {% load static %}
 {% block title %}
-  CFE | Registro de socio
+	{% if opciones == 'usuario' %}
+		CFE | Registro de usuario
+	{% endif %}
+	{% if opciones == 'socio' %}
+		CFE | Descuento para socios
+	{% endif %}
+	{% if opciones == 'encontrar' %}
+		CFE | Recupera tu usuario
+	{% endif %}	
 {% endblock %}
 {% block style %}
 	{% if opciones == 'usuario' %}
-		form p:nth-child(2), form p:nth-child(4), form p:nth-child(7){
+		form p:nth-child(2), form p:nth-child(6){
 		display: none;
 		}
 	{% endif %}
+	{% if opciones == 'socio' %}
+		form p:nth-child(3), form p:nth-child(4), form p:nth-child(5){
+		display: none;
+		}
+	{% endif %}
+	{% if opciones == 'encontrar' %}
+		form p:nth-child(2), form p:nth-child(3), form p:nth-child(5), form p:nth-child(6){
+		display: none;
+		}
+	{% endif %}	
 {% endblock %}
 {% block content %}
 <div id="cfe-usuario-marco" class="cfe-mimodal">
 	<div class="cfe-modal-content">
-		<span class="cfe-close"><a href="https://cfevirtual.camarasal.com/">x</a></span>
-		{% if opciones == 'socio' %}
-		  <h3>Registro de Socio</h3>
-		{% endif %}
-		{% if opciones == 'usuario' %}
-		  <h3>Registro de Usuario</h3>
-		{% endif %}
+		<span class="cfe-close"><a href={{ url_cerrar }}>x</a></span>
+			{% if opciones == 'usuario' %}
+			  <h3>Registro de Usuario</h3>
+			{% endif %}
+			{% if opciones == 'socio' %}
+			  <h3>Descuento para socios</h3>
+			  <p>Accede al descuento especial para socios CAMARASAL, en todos nuestros cursos</p>
+			{% endif %}
+			{% if opciones == 'encontrar' %}
+			  <h3>Recupera tu usuario y contraseña</h3>
+			  <p>Olvidaste tus datos, enviaremos al correo con el que te inscribiste, el usuario y contrasña</p>
+			{% endif %}			
 		<form method="post">
 			{% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Enviar</button>
+        <p><button type="submit">Enviar</button></p>
 		</form>
 		{% if opciones == 'socio' %}
 			<datalist id="browsers">
@@ -37,9 +60,11 @@
 
 </div>
 <script>
+<!--
 {% if opciones == 'usuario' %}
 	document.getElementById("id_nombre").placeholder = "Nombre Completo";
 {% endif %}
+-->
 </script>
 
 {% endblock %}
