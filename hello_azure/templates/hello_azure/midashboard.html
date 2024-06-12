@@ -1,35 +1,88 @@
-<h2>Control de la base de usuarios y registros</h2>
-<p>Crear un nuevo registro</p>
-<p>Modificar un registro</p>
+{% load static %}
+<!doctype html>
+<head>
+    <title>Mi DashBoard</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="icon"href="{% static 'favicon.ico' %}">
+	<style>
+		.jumbotron {
+		background-color: #f4511e; /* Orange */
+		color: #ffffff;
+		}
+		.bg-grey {
+		background-color: #f6f6f6;
+		}
+	</style>
+</head>
+<html>
+   <body>
+		<div class="jumbotron text-center">
+			<h1>Bienvenido a mi DashBoard</h1>
+			<p>Desbloquea el contenido</p>
+			<form class="form-inline">
+				<div class="input-group">
+					<input type="text" class="form-control" size="50" placeholder="Contraseña" required>
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-danger">Desbloquear</button>
+					</div>
+				</div>
+			</form>
+		</div>
+    <main class="container">
+		<div class="container-fluid">
+				<h2>Control de la base de usuarios y registros</h2>
+				<div class="row">
+					<div class="col-md-3">
+						<ul class="nav nav-pills nav-stacked">
+							<li class="active"><a href="#">Home</a></li>
+							<li><a href="nuevoregistro">Nuevo registro</a></li>
+							<li><a href="#">Nuevo curso</a></li>
+							<li><a href="#">usuarios</a></li>
+							<li><a href="#">los cursos</a></li>
+							<li><a href="#">reporte</a></li>
+						</ul>
+					</div>
+					<div class="col-md-9">
+						<p>Este es el contenidos Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+					</div>
+				</div>
+		</div>
 
-<table border="1">
-    <thead>
-        <tr>
-            <th>Título 1</th>
-            <th>Título 2</th>
-            <th>Título 3</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Celda 1</td>
-            <td>Celda 2</td>
-            <td>Celda 3</td>
-        </tr>
-        <tr>
-            <td>Celda 4</td>
-            <td>Celda 5</td>
-            <td>Celda 6</td>
-        </tr>
-        <tr>
-            <td>Celda 7</td>
-            <td>Celda 8</td>
-            <td>Celda 9</td>
-        </tr>
-        <tr>
-            <td>Celda 10</td>
-            <td>Celda 11</td>
-            <td>Celda 12</td>
-        </tr>
-    </tbody>
-</table>
+		<div class="container-fluid bg-grey">
+			<table align="center" style="border: 1px #cc0040 solid">
+				<thead>
+					<tr>
+						<th style="border: 1px #cc0040 solid">ID</th>
+						<th style="border: 1px #cc0040 solid">Nombre Completo</th>
+						<th style="border: 1px #cc0040 solid">Correo Electronico</th>
+						<th style="border: 1px #cc0040 solid">Telefono</th>
+						<th style="border: 1px #cc0040 solid">Empresa</th>
+						<th style="border: 1px #cc0040 solid">Codigo de Socio</th>
+						<th style="border: 1px #cc0040 solid">Usuario</th>
+						<th style="border: 1px #cc0040 solid">Contraseña</th>
+						<th style="border: 1px #cc0040 solid">Estado</th>
+						<th style="border: 1px #cc0040 solid">Fecha</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for x in mymiembros %}
+						<tr>
+							<td style="border: 1px #cc0040 solid"><a href="editar/{{ x.id }}">{{ x.id }}</a></td>
+							<td style="border: 1px #cc0040 solid">{{ x.nombre }}</td>
+							<td style="border: 1px #cc0040 solid">{{ x.correo }}</td>
+							<td style="border: 1px #cc0040 solid">{{ x.telefono }}</td>
+							<td style="border: 1px #cc0040 solid">{{ x.empresa }}</td>
+							<td style="border: 1px #cc0040 solid">{{ x.codigo }}</td>
+							<td style="border: 1px #cc0040 solid">{{ x.usuario }}</td>
+							<td style="border: 1px #cc0040 solid">{{ x.password }}</td>
+							<td style="border: 1px #cc0040 solid">{{ x.estado }}</td>
+							<td style="border: 1px #cc0040 solid">{{ x.joined_date }}</td>
+						</tr>
+						{% endfor %}
+				</tbody>
+			</table>
+		</div>
+   </main>
+      
+   </body>
+</html>

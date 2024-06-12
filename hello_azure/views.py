@@ -4,15 +4,33 @@ from django.views.decorators.csrf import csrf_exempt
 from .forms import SociosForm
 from .lista_socios import datos_socios
 from .miscursos import obtener_url_curso, obtener_url_pago, dic_cursos
+from .models import MisDatos
 
 def index(request):
     print('Request for index page received')
     return render(request, 'hello_azure/index.html')
     
 def panel(request):
-    return render(request, 'hello_azure/midashboard.html')
+    myusuario = MisDatos.objects.all().values()
+    #template = loader.get_template('miregistros.html')
+    context = {
+        'mymiembros': myusuario,
+    }
+    #return HttpResponse(template.render(context, request))
+    return render(request, 'hello_azure/midashboard.html', context)
 
-@csrf_exempt
+@csrf_exempt    
+def nuevo_registro(request):
+    if request.method == 'POST':
+        usuario = request.POST.get('usuario')
+        password = request.POST.get('password')
+        estado = 'no'
+        MisDatos.objects.create(usuario=usuario, password=password, estado=estado)
+        return redirect('panel')
+        #return render(request, 'hello_azure/midashboard.html')
+    else:
+        return render(request, 'hello_azure/nuevoregistro.html')
+
 def hello(request):
     if request.method == 'POST':
         name = request.POST.get('name')

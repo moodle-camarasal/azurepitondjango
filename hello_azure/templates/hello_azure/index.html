@@ -15,42 +15,12 @@
             <h1 class="display-6 fw-bold text-primary">Extensión de camarasal</h1>            
           </div>
 		  <div class="container text-center"><ul>
-			<li><a href="hello/entry">Formulario</a></li>
+		   <li><a href="hello/panel">Mi dashboard</a></li>
 			<li><a href="hello/entry?opcion=usuario&id=24">Formulario usuario</a></li>
 			<li><a href="hello/entry?opcion=socio&id=24">Formulario socio</a></li>
 			<li><a href="hello/entry?opcion=encontrar&id=24">Recupera tu usuario</a></li>
 		  </ul></div>
-        <form method="post" action="hello">
-            {% csrf_token %}
-            <div class="col-md-6 mx-auto text-center">
-                <label for="name" class="form-label fw-bold fs-5">Please tell me your name?</label>
-
-                <!-- <p class="lead mb-2">Could you please tell me your name?</p> -->
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
-                    <input type="text" class="form-control" id="name" name="name" style="max-width: 256px;">
-                  </div>            
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-2">
-                  <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Say Hello</button>
-                </div>            
-            </div>
-        </form>
      </main>
-		<!--<script src="{% static 'js/myscrypt.js' %}"></script> 
-		<script>
-		document.addEventListener('DOMContentLoaded', function() { 
-	const h1 = document.querySelector('h1');
-let color = 'blue';
 
-h1.addEventListener('click', () => {
-  if (color === 'blue') {
-    h1.style.color = 'red';
-    color = 'red';
-  } else {
-    h1.style.color = 'blue';
-    color = 'blue';
-  }
-});	
-		});
-		</script>     -->
    </body>
 </html>
