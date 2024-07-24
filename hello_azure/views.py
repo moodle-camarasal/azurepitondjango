@@ -5,13 +5,17 @@ from .forms import SociosForm
 from .lista_socios import datos_socios
 from .miscursos import obtener_url_curso, obtener_url_pago, dic_cursos
 from .models import MisDatos
+from .managercsv import registroCSV
+
 
 def index(request):
     print('Request for index page received')
     return render(request, 'hello_azure/index.html')
     
 def panel(request):
-    myusuario = MisDatos.objects.all().values()
+    cuenta = registroCSV()
+    myusuario = cuenta.obtener_filas_csv()
+    #myusuario = MisDatos.objects.all().values()
     #template = loader.get_template('miregistros.html')
     context = {
         'mymiembros': myusuario,
